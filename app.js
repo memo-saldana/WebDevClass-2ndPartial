@@ -37,6 +37,10 @@ app.get('/met', (req,res) => {
     });
 })
 
+app.get('/*', (req,res) => {
+  return res.status(404).json({message: "No se encontró la ruta deseada"});
+})
+
 app.listen(PORT, () => {
   console.log("App running on port " + PORT);
   
