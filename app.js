@@ -10,6 +10,8 @@ app.get('/students/:id', (req,res) => {
     "id": "A01039888",
     "fullname": "José Guillermo Saldaña Cárdenas",
     "nickname": "Memo Saldaña",
+    "major": "ITC",
+    "grade": "100 (You know it is you don\'t have to check it 🤣)", 
     "age": 21
   });
 })
