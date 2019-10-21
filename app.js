@@ -28,24 +28,22 @@ app.get('/met', (req,res) => {
         ...data, searchTerm: search //Extra points for spread operator?
       });
     })
-    .catch((err) => {
-      if(err){
-        if(err.requestError){
-          if(err.error.response){
-            let message = ''
-            switch(err.error.response.statusCode) {
-              case 404:
-                'No se encontró ningun resultado con la busqueda'
-              break;
-            }
-            return res.status(err.error.response.statusCode).json({message});
-          } else if(err.error.code == 'ENOTFOUND') {
-            return res.status(500).json({message: "No se pudo conectar con el API del Met"});
+    .catch((err) => { 
+      if(err.requestError){
+        if(err.error.response){
+          let message = ''
+          switch(err.error.response.statusCode) {
+            case 404:
+              'No se encontró ningun resultado con la busqueda'
+            break;
           }
-          return res.status(500).json({message: "Ocurrió un error inesperado."})
-        } else {
-          return res.status(err.statusCode).json({message:err.message});
+          return res.status(err.error.response.statusCode).json({message});
+        } else if(err.error.code == 'ENOTFOUND') {
+          return res.status(500).json({message: "No se pudo conectar con el API del Met"});
         }
+        return res.status(500).json({message: "Ocurrió un error inesperado."})
+      } else {
+        return res.status(err.statusCode).json({message:err.message});
       }
     });
 })
