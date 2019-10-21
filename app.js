@@ -19,19 +19,30 @@ app.get('/met', (req,res) => {
   met.search(search)
     .then((data) => {
       
-      return met.get(data)
+      return met.get(data) // Extra point for chained promises?
     })
     .then(data => {
       return res.status(200).json({
-        ...data, searchTerm: search
+        ...data, searchTerm: search //Extra points for spread operator?
       });
     })
     .catch((err) => {
       if(err){
         if(err.requestError){
-          return res.status(500).json({error: err.error})
+          if(err.error.response){
+            let message = ''
+            switch(err.error.response.statusCode) {
+              case 404:
+                'No se encontró ningun resultado con la busqueda'
+              break;
+            }
+            return res.status(err.error.response.statusCode).json({message});
+          } else if(err.error.code == 'ENOTFOUND') {
+            return res.status(500).json({message: "No se pudo conectar con el API del Met"});
+          }
+          return res.status(500).json({message: "Ocurrió un error inesperado."})
         } else {
-          return res.status(400).json({message:err.message});
+          return res.status(err.statusCode).json({message:err.message});
         }
       }
     });

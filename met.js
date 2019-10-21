@@ -2,11 +2,11 @@ const request = require('request'),
       exp = {};
 
 exp.search = search => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => { // Extra point for promises?
     request.get(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=${search}`,(error, response, body)=>{
       if(error) return reject({requestError: true, error});
       let jsonBody = JSON.parse(body);
-      if(jsonBody.total==0) return reject({requestError: false, message: "No se encontró ningun resultado con la busqueda"});
+      if(jsonBody.total==0) return reject({requestError: false, message: "No se encontró ningun resultado con la busqueda", statusCode: 404});
       return resolve( jsonBody.objectIDs[0]);
     })
   });
