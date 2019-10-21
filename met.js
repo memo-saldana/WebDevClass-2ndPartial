@@ -16,7 +16,7 @@ exp.get = objectId => {
     request.get({url:`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`, json:true}, (error, response, body) => {
       if(error) return reject({requestError: true, error})
       return resolve({
-        artist : body.constituents[0].name,
+        artist : body.constituents? body.constituents[0].name : 'Anonymous',
         title: body.title,
         year: body.objectEndDate,
         technique: body.medium,
