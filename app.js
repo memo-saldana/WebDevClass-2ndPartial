@@ -1,4 +1,5 @@
 const express = require('express'),
+      path = require('path'),
       app = express(),
       met = require('./met'),
       PORT = process.env.PORT || 3000;
@@ -47,7 +48,9 @@ app.get('/met', (req,res) => {
       }
     });
 })
-
+app.get('/', (req,res)=>{
+  res.sendFile(path.join(__dirname+'/index.html'))
+})
 app.get('/*', (req,res) => {
   return res.status(404).json({message: "No se encontró la ruta deseada"});
 })
