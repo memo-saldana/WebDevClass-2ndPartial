@@ -1,0 +1,24 @@
+{
+  "name": "WebDevClass-2ndPartial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/memo-saldana/WebDevClass-2ndPartial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/memo-saldana/WebDevClass-2ndPartial/issues"
+  },
+  "homepage": "https://github.com/memo-saldana/WebDevClass-2ndPartial#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.0"
+  }
+}
